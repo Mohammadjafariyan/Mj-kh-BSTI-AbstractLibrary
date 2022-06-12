@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>AbstractLibrary</id>
+    <version>1.0.0</version>
+    <authors>AbstractLibrary</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="DocX" version="1.7.1" exclude="Build,Analyzers" />
+        <dependency id="MD.PersianDateTime" version="4.2.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authentication.Facebook" version="3.1.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authentication.Google" version="3.1.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authentication.MicrosoftAccount" version="3.1.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authentication.Twitter" version="3.1.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Identity.EntityFrameworkCore" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Identity.UI" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Mvc" version="2.2.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.InMemory" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.Sqlite" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Identity.Stores" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="NBitcoin" version="5.0.73" exclude="Build,Analyzers" />
+        <dependency id="NBitcoin.TestFramework" version="2.0.21" exclude="Build,Analyzers" />
+        <dependency id="QBitNinja.Client" version="1.0.3.52" exclude="Build,Analyzers" />
+        <dependency id="System.IO.Packaging" version="6.0.0-preview.3.21201.4" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http.Json" version="3.2.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework=".NETCoreApp3.1">
+        <frameworkReference name="Microsoft.AspNetCore.App" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/netcoreapp3.1/appsettings.json" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="E:\workplace\shared\AbstractLibrary\bin\Debug\netcoreapp3.1\ar-ae\AbstractLibrary.resources.dll" target="lib\netcoreapp3.1\ar-ae\AbstractLibrary.resources.dll" />
+    <file src="E:\workplace\shared\AbstractLibrary\bin\Debug\netcoreapp3.1\az-latn-az\AbstractLibrary.resources.dll" target="lib\netcoreapp3.1\az-latn-az\AbstractLibrary.resources.dll" />
+    <file src="E:\workplace\shared\AbstractLibrary\bin\Debug\netcoreapp3.1\en\AbstractLibrary.resources.dll" target="lib\netcoreapp3.1\en\AbstractLibrary.resources.dll" />
+    <file src="E:\workplace\shared\AbstractLibrary\bin\Debug\netcoreapp3.1\fa\AbstractLibrary.resources.dll" target="lib\netcoreapp3.1\fa\AbstractLibrary.resources.dll" />
+    <file src="E:\workplace\shared\AbstractLibrary\bin\Debug\netcoreapp3.1\tr-tr\AbstractLibrary.resources.dll" target="lib\netcoreapp3.1\tr-tr\AbstractLibrary.resources.dll" />
+    <file src="E:\workplace\shared\AbstractLibrary\bin\Debug\netcoreapp3.1\AbstractLibrary.Views.dll" target="lib\netcoreapp3.1\AbstractLibrary.Views.dll" />
+    <file src="E:\workplace\shared\AbstractLibrary\bin\Debug\netcoreapp3.1\AbstractLibrary.runtimeconfig.json" target="lib\netcoreapp3.1\AbstractLibrary.runtimeconfig.json" />
+    <file src="E:\workplace\shared\AbstractLibrary\bin\Debug\netcoreapp3.1\AbstractLibrary.dll" target="lib\netcoreapp3.1\AbstractLibrary.dll" />
+    <file src="E:\workplace\shared\AbstractLibrary\appsettings.json" target="content\appsettings.json" />
+    <file src="E:\workplace\shared\AbstractLibrary\appsettings.json" target="contentFiles\any\netcoreapp3.1\appsettings.json" />
+  </files>
+</package>

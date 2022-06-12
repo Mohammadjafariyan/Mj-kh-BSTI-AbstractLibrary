@@ -1,0 +1,686 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+
+    <data name="AppName" xml:space="preserve">
+        <value>بیت پرداخت</value>
+    </data>
+    <data name="NewPaymentGateway" xml:space="preserve">
+        <value>ثبت درگاه جدید</value>
+    </data>
+    <data name="Docs" xml:space="preserve">
+        <value>مستندات</value>
+    </data>
+
+    <data name="NameAndLastName" xml:space="preserve">
+        <value>نام و نام خانوادگی</value>
+    </data>
+
+
+    <data name="Phone" xml:space="preserve">
+        <value>موبایل</value>
+    </data>
+    <data name="Required" xml:space="preserve">
+        <value>این فیلد ضروری است</value>
+    </data>
+
+
+
+
+
+    <data name="BusinessPhone" xml:space="preserve">
+        <value>تلفن کسب وکار</value>
+    </data>
+    <data name="BusinessDomain" xml:space="preserve">
+        <value>نوع کسب و کار</value>
+    </data>
+    <data name="BusinessUniqId" xml:space="preserve">
+        <value>شناسه شرکت</value>
+    </data>
+    <data name="BusinessCeoName" xml:space="preserve">
+        <value>نام رپیس کسب و کار </value>
+    </data>
+    <data name="BusinessSubmitDate" xml:space="preserve">
+        <value>تاریخ شروع کسب و کار</value>
+    </data>
+    <data name="BusinessSabtCode" xml:space="preserve">
+        <value>کد شماره  </value>
+    </data>
+    <data name="BusinessMiliCode" xml:space="preserve">
+        <value>شناسه ملی</value>
+    </data>
+
+    <data name="BusinessPostalCode" xml:space="preserve">
+        <value>کد پستی</value>
+    </data>
+
+    <data name="BusinessAddress" xml:space="preserve">
+        <value>آدرس</value>
+    </data>
+    <data name="PaymentGatewayName" xml:space="preserve">
+        <value>نام اختصاصی درگاه</value>
+    </data>
+    <data name="WebsiteUrl" xml:space="preserve">
+        <value>آدرس وب سایت</value>
+    </data>
+    <data name="GatewayUniqueAddress" xml:space="preserve">
+        <value>آدرس اختصاصی درگاه</value>
+    </data>
+    <data name="PaymentTime" xml:space="preserve">
+        <value>تبدیل دارایی زمان خرید</value>
+    </data>
+    <data name="OnRequestExchange" xml:space="preserve">
+        <value>تبدیل دارایی در زمان درخواست تسویه</value>
+    </data>
+    <data name="ExchangeType" xml:space="preserve">
+        <value>نوع تبدیل دارایی</value>
+    </data>
+    <data name="AcceptanceStatus" xml:space="preserve">
+        <value>وضعیت تایید</value>
+    </data>
+    <data name="BitCoinEnabled" xml:space="preserve">
+        <value>پرداخت بیت کوین فعال باشد</value>
+    </data>
+    <data name="CustomerType" xml:space="preserve">
+        <value>نوع شخص</value>
+    </data>
+    <data name="CurrencyId" xml:space="preserve">
+        <value>نوع رمز ارز</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+        <value>عنوان</value>
+    </data>
+    <data name="Stock" xml:space="preserve">
+        <value>موجودی ریال شما نزد سایت</value>
+    </data>
+    <data name="GatewayWallets" xml:space="preserve">
+        <value>رمز ارز های درگاه</value>
+    </data>
+    <data name="RequiredGatewayWallets" xml:space="preserve">
+        <value>حداقل باید یک رمز ارز انتخاب شود</value>
+    </data>
+    <data name="B_API_KEY_NotSet" xml:space="preserve">
+        <value>توکن زده نشده است</value>
+    </data>
+    <data name="OrderIdRequired" xml:space="preserve">
+        <value>کد سفارش ارسال نشده است</value>
+    </data>
+    <data name="AmountRequired" xml:space="preserve">
+        <value>توکن زده نشده است</value>
+    </data>
+    <data name="EmptyRequest" xml:space="preserve">
+        <value>هیچ پارامتری دریافت نشد</value>
+    </data>
+    <data name="CallbackRequired" xml:space="preserve">
+        <value>Callback ارسال نشده است</value>
+    </data>
+    <data name="CallbackUrlInvalid" xml:space="preserve">
+        <value>آدرس Callback اشتباه است</value>
+    </data>
+    <data name="MinAmountRequired" xml:space="preserve">
+        <value>میزان Amount نباید از کمترین مقدار مجاز کمتر باشد</value>
+    </data>
+    <data name="MaxAmountRequired" xml:space="preserve">
+        <value>میزان Amount نباید از بیشترین مقدار مجاز بیشتر باشد</value>
+    </data>
+    <data name="OrderId_Dublicate" xml:space="preserve">
+        <value>برای این کد سفارش قبلا درگاه ایجاد شده است</value>
+    </data>
+    <data name="API_Key_NotFound" xml:space="preserve">
+        <value>توکن اشتباه است یافت نشد برای ایجاد توکن جدید به پنل کاربری مراجعه فرمایید</value>
+    </data>
+    <data name="TransactionStatusNotDraft" xml:space="preserve">
+        <value>وضعیت این تراکنش قبلا مشخص شده است</value>
+    </data>
+    <data name="MainTransactions" xml:space="preserve">
+        <value>جدول تراکنش های صورت گرفته</value>
+    </data>
+    <data name="TestTransactions" xml:space="preserve">
+        <value>تراکنش های شبکه تست</value>
+    </data>
+    <data name="CallbackAddress" xml:space="preserve">
+        <value>آدرس ارسال نتیجه پرداخت به سایت شما</value>
+    </data>
+    <data name="DateTime" xml:space="preserve">
+        <value>تاریخ و ساعت</value>
+    </data>
+    <data name="ReceivedCoins" xml:space="preserve">
+        <value>کوین های دریافت شده</value>
+    </data>
+    <data name="SpentCoins" xml:space="preserve">
+        <value>کوین های خرج شده </value>
+    </data>
+    <data name="BTCBalance.Operations" xml:space="preserve">
+        <value>BTCBalance.Operations</value>
+    </data>
+    <data name="درخواست های Balance از سرور های خارجی" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Continuation" xml:space="preserve">
+        <value>Continuation</value>
+    </data>
+    <data name="ActionButtons" xml:space="preserve">
+        <value>عملیات</value>
+    </data>
+    <data name="Details" xml:space="preserve">
+        <value>جزئیات</value>
+    </data>
+    <data name="CoinNotFoundItIsWrong" xml:space="preserve">
+        <value>رمز ارز یافت نشد اشتباه ارسال شده است</value>
+    </data>
+    <data name="WalletNotFound" xml:space="preserve">
+        <value>والت یافت نشد</value>
+    </data>
+    <data name="GreaterThanWalletStock" xml:space="preserve">
+        <value>مقدار درخواست شده برای تسویه حساب بیشتر از میزان کیف پول است</value>
+    </data>
+    <data name="BalanceWalletRialLessThanZero" xml:space="preserve">
+        <value>میزان کسر و تسویه از کیف پول کمتر مساوی صفر است</value>
+    </data>
+    <data name="BankCode" xml:space="preserve">
+        <value>کد رهگیری بانک</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>توضیحات</value>
+    </data>
+    <data name="Rial" xml:space="preserve">
+        <value>ریال</value>
+    </data>
+    <data name="WalletRialBefore" xml:space="preserve">
+        <value>موجودی قبل از این</value>
+    </data>
+    <data name="WalletRialAfter" xml:space="preserve">
+        <value>موجودی بعد از این</value>
+    </data>
+    <data name="CoinWrong" xml:space="preserve">
+        <value>رمز ارز اشتباه است</value>
+    </data>
+    <data name="welcomeToDashboard" xml:space="preserve">
+        <value>سلام خوش آمدید</value>
+    </data>
+    <data name="Profile" xml:space="preserve">
+        <value>پروفایل</value>
+    </data>
+    <data name="Setting" xml:space="preserve">
+        <value>تنظیمات</value>
+    </data>
+    <data name="Logout" xml:space="preserve">
+        <value>خروج از سیستم</value>
+    </data>
+    <data name="WalletBalance" xml:space="preserve">
+        <value>دارای شما نزد سایت</value>
+    </data>
+    <data name="WalletWithdraw" xml:space="preserve">
+        <value>تسویه حساب شده</value>
+    </data>
+    <data name="TotalBTCBalance" xml:space="preserve">
+        <value>کل دارایی بیت کوین</value>
+    </data>
+    <data name="TotalWithdrawRial" xml:space="preserve">
+        <value>کل تسویه شده ریالی</value>
+    </data>
+    <data name="TotalWalletRial" xml:space="preserve">
+        <value>تسویه نشده ریالی</value>
+    </data>
+    <data name="Amount" xml:space="preserve">
+        <value>مقدار</value>
+    </data>
+    <data name="TargetAddress" xml:space="preserve">
+        <value>آدرس مقصد</value>
+    </data>
+    <data name="MoneyUnit" xml:space="preserve">
+        <value>واحد رمز ارز</value>
+    </data>
+    <data name="Percent" xml:space="preserve">
+        <value>بصورت درصدی</value>
+    </data>
+    <data name="Value" xml:space="preserve">
+        <value>مقدار</value>
+    </data>
+    <data name="RialDeduction" xml:space="preserve">
+        <value>کسر ریالی</value>
+    </data>
+    <data name="CoinDeduction" xml:space="preserve">
+        <value>کسر از رمز ارز</value>
+    </data>
+    <data name="Fee" xml:space="preserve">
+        <value>فی</value>
+    </data>
+    <data name="FeeValueType" xml:space="preserve">
+        <value> بصورت  کسر درصدی یا مقداری </value>
+    </data>
+    <data name="FeeType" xml:space="preserve">
+        <value>نوع Fee کسر رمز ارزی یا ریالی </value>
+    </data>
+    <data name="PaymentGatewayDemo" xml:space="preserve">
+        <value> دموی پرداخت رمز ارزی</value>
+    </data>
+    <data name="Title" xml:space="preserve">
+        <value>عنوان</value>
+    </data>
+    <data name="IndexMsg" xml:space="preserve">
+        <value>درگاه پرداخت رمز ارز</value>
+    </data>
+    <data name="IndexMsgStrong" xml:space="preserve">
+        <value>محصولات خود را به جهان بفروشید</value>
+    </data>
+    <data name="DemoMsg" xml:space="preserve">
+        <value>دموی پرداخت رمز ارز در لینک زیر در دسترس می باشد</value>
+    </data>
+    <data name="features" xml:space="preserve">
+        <value>امکانات و خدمات</value>
+    </data>
+    <data name="msg1" xml:space="preserve">
+        <value>درگاه پرداخت رمز ارز</value>
+    </data>
+    <data name="msg2" xml:space="preserve">
+        <value>تسویه حساب روزانه</value>
+    </data>
+    <data name="msg3" xml:space="preserve">
+        <value>کارمزد کم</value>
+    </data>
+    <data name="msg4" xml:space="preserve">
+        <value>انتخاب کارمزد از فروشنده یا خریدار</value>
+    </data>
+    <data name="msg5" xml:space="preserve">
+        <value>پشتیبانی از اکثر رمز ارز ها</value>
+    </data>
+    <data name="msg6" xml:space="preserve">
+        <value>پشتیبانی  24 ساعته 7 روز هفته</value>
+    </data>
+    <data name="msg7" xml:space="preserve">
+        <value>امن با سرور های قدرتمند</value>
+    </data>
+    <data name="msg8" xml:space="preserve">
+        <value>آمار های دقیق</value>
+    </data>
+    <data name="msg9" xml:space="preserve">
+        <value>محاسبه سود و زیان</value>
+    </data>
+    <data name="ourServices" xml:space="preserve">
+        <value>خدمات ما</value>
+    </data>
+    <data name="service1Msg" xml:space="preserve">
+        <value>تسویه حساب روزانه با کارمزد کم</value>
+    </data>
+    <data name="service1Desc" xml:space="preserve">
+        <value>هر روز در ساعت مقرر تمامی تراکنش های کاربران سایت به حساب کارت بانکی شبا تسویه حساب می شود</value>
+    </data>
+    <data name="service1Prices" xml:space="preserve">
+        <value>بیشتر بدانید : نمایش کارمزد ها</value>
+    </data>
+    <data name="service2Msg" xml:space="preserve">
+        <value>پشتیبانی 24 ساعته در 7 روز هفته</value>
+    </data>
+    <data name="service2Desc" xml:space="preserve">
+        <value>پشتیبانی همیشگی این اطمینان را فراهم می کند که هیچ گونه ایراد و اشکالی در کارکرد سایت و ارائه خدمات نخواهد بود و در جلب رضایت حداکثری کاربران کوشا خواهیم بود</value>
+    </data>
+    <data name="service2link" xml:space="preserve">
+        <value>بیشتر بدانید : تیکتینگ و درخواست پشتیبانی یا راهنمایی</value>
+    </data>
+    <data name="service3Msg" xml:space="preserve">
+        <value>مستندات و Api  های ساده</value>
+    </data>
+    <data name="service3Desc" xml:space="preserve">
+        <value>افزودن درگاه ما به سایت شما به راحتی آب خوردن است ، مستندات و نمونه کد های هر زبان برای راحتی در لینک زیر در دسترس است</value>
+    </data>
+    <data name="service3link" xml:space="preserve">
+        <value>بیشتر بدانید : مستندات</value>
+    </data>
+    <data name="Guides" xml:space="preserve">
+        <value>راهنمایی ها</value>
+    </data>
+    <data name="GuidesHowCurrencyWorks" xml:space="preserve">
+        <value>برای آشنایی به نحوه کارکرد رمز ارز و بیت کوین کلیک نمایید</value>
+    </data>
+    <data name="LearnMore" xml:space="preserve">
+        <value>ببیشتر بدانید</value>
+    </data>
+    <data name="GuidesHowToAddPaymentGateWay" xml:space="preserve">
+        <value>چگونه درگاه رمز ارز را به سایت خود اضافه کنم ؟ </value>
+    </data>
+    <data name="GuidesPaymentGatewayCanHelp" xml:space="preserve">
+        <value>چگونه درگاه رمز ارز می تواند برای شرکت یا سازمان من مفید باشد ؟</value>
+    </data>
+    <data name="linkRegister" xml:space="preserve">
+        <value>ثبت نام</value>
+    </data>
+    <data name="linkLogin" xml:space="preserve">
+        <value>ورود</value>
+    </data>
+    <data name="linkIntro" xml:space="preserve">
+        <value>راهنما</value>
+    </data>
+    <data name="linkDocs" xml:space="preserve">
+        <value>مستندات</value>
+    </data>
+    <data name="welcome" xml:space="preserve">
+        <value>خوش آمدید</value>
+    </data>
+    <data name="welcomeRestircted" xml:space="preserve">
+        <value>دسترسی به این قسمت تنها برای کاربران عضو محدود شده است</value>
+    </data>
+    <data name="welcomePlzRegister" xml:space="preserve">
+        <value>لطفا جهت دسترسی به تمامی امکانات سایت وارد شوید و در صورت نداشتن نام کاربری و رمز عبور می توانید رایگان ثبت نام فرمایید</value>
+    </data>
+    <data name="welcomeLoginWithOtherServices" xml:space="preserve">
+        <value>ورود یا ثبت نام با سرویس های دیگر</value>
+    </data>
+    <data name="Forgotyourpassword" xml:space="preserve">
+        <value>رمز عبور خود را فراموش کرده اید </value>
+    </data>
+    <data name="Registerasanewuser" xml:space="preserve">
+        <value>بعنوان کاربر جدید ثبت نام نمایید</value>
+    </data>
+    <data name="Resendemailconfirmation" xml:space="preserve">
+        <value>ارسال مجدد کد ثبت نام</value>
+    </data>
+    <data name="Email" xml:space="preserve">
+        <value>ایمیل</value>
+    </data>
+    <data name="Password" xml:space="preserve">
+        <value>رمز عبور</value>
+    </data>
+    <data name="Remember me?" xml:space="preserve">
+        <value>مرا به یاد داشته باش</value>
+    </data>
+    <data name="signIn" xml:space="preserve">
+        <value>ورود به سیستم</value>
+    </data>
+    <data name="registerAsNewUser" xml:space="preserve">
+        <value>ثبت نام به عنوان کاربر جدید</value>
+    </data>
+    <data name="register" xml:space="preserve">
+        <value>ثبت نام</value>
+    </data>
+    <data name="registerText" xml:space="preserve">
+        <value>با ثبت نام امکانات قفل سایت باز می شود</value>
+    </data>
+    <data name="Confirm password" xml:space="preserve">
+        <value>تاکید رمز عبور </value>
+    </data>
+    <data name="goDashboard" xml:space="preserve">
+        <value>داشبورد</value>
+    </data>
+    <data name="linkLogout" xml:space="preserve">
+        <value>خروج از سیستم</value>
+    </data>
+    <data name="Text" xml:space="preserve">
+        <value>متن</value>
+    </data>
+    <data name="Action" xml:space="preserve">
+        <value>عملیات</value>
+    </data>
+    <data name="Record" xml:space="preserve">
+        <value>رکورد</value>
+    </data>
+    <data name="OrderId" xml:space="preserve">
+        <value>کد سفارش</value>
+    </data>
+    <data name="Mail" xml:space="preserve">
+        <value>ایمیل</value>
+    </data>
+    <data name="Desc" xml:space="preserve">
+        <value>توضیحات</value>
+    </data>
+    <data name="Coin" xml:space="preserve">
+        <value>رمز ارز</value>
+    </data>
+
+    <data name="A value for the '{0}' property was not provided." xml:space="preserve">
+    <value>مقداری برای خصوصیت '{0}' فراهم نشده است.</value>
+        <comment>MissingBindRequiredValue</comment>
+  </data>
+    <data name="A value is required." xml:space="preserve">
+    <value>وارد کردن مقدار الزامی است.</value>
+        <comment>MissingKeyOrValue</comment>
+  </data>
+    <data name="Null value is invalid." xml:space="preserve">
+    <value>مقدار خالی معتبر نیست.</value>
+        <comment>ValueMustNotBeNull</comment>
+  </data>
+    <data name="The field {0} must be a number." xml:space="preserve">
+    <value>فیلد '{0}' بایستی عددی باشد.</value>
+        <comment>ValueMustBeANumber</comment>
+  </data>
+    <data name="The supplied value is invalid for {0}." xml:space="preserve">
+    <value>مقدار وارد شده برای {0} معتبر نیست.</value>
+        <comment>UnknownValueIsInvalid</comment>
+  </data>
+    <data name="The value '{0}' is invalid." xml:space="preserve">
+    <value>مقدار '{0}' معتبر نیست.</value>
+        <comment>ValueIsInvalid</comment>
+  </data>
+    <data name="The value '{0}' is not valid for {1}." xml:space="preserve">
+    <value>مقدار '{0}' برای {1} معتبر نیست.</value>
+        <comment>AttemptedValueIsInvalid</comment>
+  </data>
+
+    <data name="Id" xml:space="preserve">
+    <value>شناسه</value>
+  </data>
+    <data name="Length of {0} should be between {1} and {2}." xml:space="preserve">
+    <value>طول {0} بایستی بین {1} و {2} باشد.</value>
+  </data>
+    <data name="globalLoginRegisterText" xml:space="preserve">
+        <value>ورود / ثبت نام به سیستم امن و قدرتمند پشتیبان درگاه های رمز ارز </value>
+    </data>
+    <data name="ChartsPanelName" xml:space="preserve">
+        <value>آمار ها و گزارشات</value>
+    </data>
+    <data name="changeTheme" xml:space="preserve">
+        <value>تغییر تم قالب</value>
+    </data>
+    <data name="paymentSuccess" xml:space="preserve">
+        <value>خرید شما با موفقیت انجام شد</value>
+    </data>
+    <data name="paymentSuccessP1" xml:space="preserve">
+        <value>در این مرحله از پروسه پرداخت 
+                        کاربر به سایت مرجوع می شود </value>
+    </data>
+    <data name="paymentSuccessP2" xml:space="preserve">
+        <value>        و بعد از تایید پرداخت توسط سیستم و کارشناس 
+                                                    تایید شدن کامل پرداخت به سایت اطلاع رسانی میشود 
+                       </value>
+    </data>
+    <data name="HomePage" xml:space="preserve">
+        <value>صفحه اصلی</value>
+    </data>
+    <data name="Status" xml:space="preserve">
+        <value>وضعیت</value>
+    </data>
+    <data name="PayByCustomer" xml:space="preserve">
+        <value>پرداخت توسط کاربر</value>
+    </data>
+    <data name="UniqueId" xml:space="preserve">
+        <value>کد مخصوص</value>
+    </data>
+    <data name="Callback" xml:space="preserve">
+        <value>آدرس بازگشت به سایت مبدا</value>
+    </data>
+    <data name="ChangeStatusDateTime" xml:space="preserve">
+        <value>آخرین زمان تغییرات اطلاعات</value>
+    </data>
+    <data name="DepositDateTime" xml:space="preserve">
+        <value>تاریخ تایید تراکنش /  واریز به کیف پول کاربر</value>
+    </data>
+    <data name="TransactionBroadCastException" xml:space="preserve">
+        <value>شرح خطا در صورت وجود</value>
+    </data>
+    <data name="IsTest" xml:space="preserve">
+        <value />
+    </data>
+    <data name="False" xml:space="preserve">
+        <value>خیر</value>
+    </data>
+    <data name="True" xml:space="preserve">
+        <value>بلی</value>
+    </data>
+   
+    <data name="RejectDescription" xml:space="preserve">
+        <value>علت رد تراکنش توسط کارشناس سیستم</value>
+    </data>
+    <data name="CoinAmount" xml:space="preserve">
+        <value>مقدار رمز ارز</value>
+    </data>
+    <data name="AcceptLanguage" xml:space="preserve">
+        <value>زبان پذیرش درگاه</value>
+    </data>
+    <data name="PaymentGatewayId" xml:space="preserve">
+        <value>کد اختصاصی درگاه</value>
+    </data>
+    <data name="IsMainCurrency" xml:space="preserve">
+        <value>رمز ارز</value>
+    </data>
+    <data name="OneRialPrice" xml:space="preserve">
+        <value>قیمت یک ریال به این رمز ارز</value>
+    </data>
+    <data name="Edit" xml:space="preserve">
+        <value>ویرایش</value>
+    </data>
+    <data name="Delete" xml:space="preserve">
+        <value>حذف</value>
+    </data>
+    <data name="LastChangeDateTime" xml:space="preserve">
+        <value>آخرین بروز رسانی</value>
+    </data>
+    <data name="Create" xml:space="preserve">
+        <value>ایجاد</value>
+    </data>
+    <data name="DepositToWallet" xml:space="preserve">
+        <value>تایید شده توسط کارشناس و واریز به کیف پول کاربر نزد سایت</value>
+    </data>
+    <data name="RialAfterFee" xml:space="preserve">
+        <value>ریال بعد از فی</value>
+    </data>
+    <data name="SiteFeeRial" xml:space="preserve">
+        <value>فی سایت به ریال</value>
+    </data>
+    <data name="ApplicationUser" xml:space="preserve">
+        <value>کاربر</value>
+    </data>
+    <data name="Username" xml:space="preserve">
+        <value>نام کاربری</value>
+    </data>
+    <data name="Phone number" xml:space="preserve">
+        <value>شماره موبایل</value>
+    </data>
+    <data name="Save" xml:space="preserve">
+        <value>ذخیره</value>
+    </data>
+    <data name="Manage Email" xml:space="preserve">
+        <value>مدیریت ایمیل</value>
+    </data>
+    <data name="IsEmailConfirmed" xml:space="preserve">
+        <value>آیا ایمیل تایید شده است</value>
+    </data>
+    <data name="New email" xml:space="preserve">
+        <value>ایمیل جدید</value>
+    </data>
+    <data name="Change password" xml:space="preserve">
+        <value>تغییر رمز عبور</value>
+    </data>
+    <data name="Current password" xml:space="preserve">
+        <value>رمز عبور کنونی</value>
+    </data>
+    <data name="New password" xml:space="preserve">
+        <value>رمز عبور جدید</value>
+    </data>
+    <data name="Confirm new password" xml:space="preserve">
+        <value>تاکید رمز عبور جدید</value>
+    </data>
+    <data name="Update password" xml:space="preserve">
+        <value>ذخیره رمز عبور جدید</value>
+    </data>
+    <data name="Change email" xml:space="preserve">
+        <value>تغییر ایمیل</value>
+    </data>
+    <data name="WaterMark" xml:space="preserve">
+        <value>واتر مارک</value>
+    </data>
+    <data name="WebsiteName" xml:space="preserve">
+        <value>عنوان وب سایت</value>
+    </data>
+    <data name="MinAmount Allowed to Payment" xml:space="preserve">
+        <value>کمترین مقدار مجاز برای درخواست تراکنش</value>
+    </data>
+    <data name="MaxAmount Allowed to Payment" xml:space="preserve">
+        <value>بیشتر مقدار مجاز برای درخواست تراکنش</value>
+    </data>
+    <data name="AdminRegisterDisabled" xml:space="preserve">
+        <value>ثبت نام ادمین جدید غیر فعال شود</value>
+    </data>
+    <data name="PerYearReserve" xml:space="preserve">
+        <value>مبلغ رزرو سالانه سرویس درگاه (بدون کسر فی توسط سایت - فی ماینر باقی خواهد بود )</value>
+    </data>
+    <data name="PerMonthReserve" xml:space="preserve">
+        <value>مبلغ رزرو ماهانه سرویس درگاه (بدون کسر فی توسط سایت - فی ماینر باقی خواهد بود )</value>
+    </data>
+    <data name="Documentation" xml:space="preserve">
+        <value>مستندات و راهنمای استفاده از سیستم</value>
+    </data>
+    <data name="UNIQUE_API_TOKEN" xml:space="preserve">
+        <value>توکن یا کلید دسترسی به وب سرویس</value>
+    </data>
+    <data name="home" xml:space="preserve">
+        <value>صفحه اصلی</value>
+    </data>
+    <data name="RejectReason" xml:space="preserve">
+        <value>علت رد </value>
+    </data>
+    <data name="ReceiverId" xml:space="preserve">
+        <value>دریافت کننده</value>
+    </data>
+    <data name="Pending" xml:space="preserve">
+        <value>مشاهده نشده</value>
+    </data>
+    <data name="RequiredReceiverId" xml:space="preserve">
+        <value>دریافت کننده مشخص نشده است</value>
+    </data>
+    <data name="AnimalFoodId" xml:space="preserve">
+        <value>نهاده</value>
+    </data>
+    <data name="MenuCategoryId" xml:space="preserve">
+        <value>دسته بندی منو</value>
+    </data>
+    <data name="ProductCategoryId" xml:space="preserve">
+        <value>دسته بندی محصولات</value>
+    </data>
+    <data name="Tags" xml:space="preserve">
+        <value>برچسب ها</value>
+    </data>
+    <data name="SlideShows" xml:space="preserve">
+        <value>اسلاید ها</value>
+    </data>
+    <data name="ProductId" xml:space="preserve">
+        <value>محصول</value>
+    </data>
+    <data name="SlideId" xml:space="preserve">
+        <value>اسلاید</value>
+    </data>
+    <data name="MenuLocation" xml:space="preserve">
+        <value>جایگاه منو</value>
+    </data>
+    <data name="Url" xml:space="preserve">
+        <value>آدرس</value>
+    </data>
+    <data name="ProductPropertyId" xml:space="preserve">
+        <value>مشخصه محصول</value>
+    </data>
+    <data name="SiteConstValue" xml:space="preserve">
+        <value>متن نمایش در وب سایت </value>
+    </data>
+    <data name="Unique" xml:space="preserve">
+        <value>نام یکتا</value>
+    </data>
+</root>

@@ -1,0 +1,87 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <PackageId>Mj-kh-BSTI-AbstractLibrary</PackageId>
+<Version>1.0.0</Version>
+<Authors>Mohammad Jafariyan khosrowshahi</Authors>
+<Company>BSTI</Company>
+<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MD.PersianDateTime" Version="4.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.2" />
+
+
+        <PackageReference Include="DocX" Version="1.7.1" />
+        <PackageReference Include="System.IO.Packaging" Version="6.0.0-preview.3.21201.4" />
+        
+        
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.5" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.5" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="3.1.5" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="3.1.5" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
+
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
+      <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.2" />
+      <PackageReference Include="NBitcoin" Version="5.0.73" />
+      <PackageReference Include="NBitcoin.TestFramework" Version="2.0.21" />
+      <PackageReference Include="QBitNinja.Client" Version="1.0.3.52" />
+      <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Model\MySpecificGlobal.cs" />
+      <Compile Remove="Controller\GenericApiController.cs" />
+      <Compile Remove="Service\LogService.cs" />
+      <Compile Remove="Model\BitPardakht\RestApiHelper2.cs" />
+      <Compile Remove="Model\BitPardakht\IC\DebugDbSeed.cs" />
+      <Compile Remove="Data\Models\KhInventoryDbContext.cs" />
+      <Compile Remove="Model\WeblogPackage\ApplicationDbContext.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="App_Code" />
+      <Folder Include="Areas\Controllers" />
+      <Folder Include="Model\BitPardakht\Data" />
+      <Folder Include="Model\BitPardakht\IC" />
+      <Folder Include="Pages\Components" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="CEWorld.Convert, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>mylib\CEWorld.Convert.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resource\SharedResource.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResource.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resource\SharedResource.fa.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResource.fa.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Installation\Setting.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Installation\Setup.cshtml" />
+    </ItemGroup>
+
+</Project>

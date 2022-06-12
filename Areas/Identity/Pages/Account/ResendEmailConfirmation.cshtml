@@ -1,0 +1,65 @@
+@page
+@model ResendEmailConfirmationModel
+@{
+    ViewData["Title"] = "Resend email confirmation";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="topspace"></div>
+
+<!-- Main -->
+<div class="d-md-flex h-md-100 align-items-center">
+    <div class="col-md-6 p-0 bg-primary h-md-100">
+        <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+            <div class="logoarea pt-5 pb-5">
+                <p>
+                    <i class="fas fa-anchor fa-3x"></i>
+                </p>
+                <h1 class="mb-0 mt-3 display-4">@BigPardakht.Model.MyGlobal.GetTranslate()["welcome"]</h1>
+                <h5 class="mb-4 font-weight-light">@BigPardakht.Model.MyGlobal.GetTranslate()["globalLoginRegisterText"] <i class="fab fa-sass fa-2x text-cyan"></i></h5>
+                @*<a class="btn btn-outline-white btn-lg btn-round" href="#" data-toggle="modal" data-target="#modal_newsletter">Download <a href="https://github.com/wowthemesnet/Anchor-Bootstrap-UI-Kit/archive/master.zip" class="downloadzip" class="hidden"></a>
+				</a>*@
+             
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-0 bg-white h-md-100 loginarea">
+        <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+
+            <form method="post" class="border rounded p-5">
+                <h4>ایمیل خود را وارد کنید</h4>
+              <div asp-validation-summary="All" class="text-danger"></div>
+                         <div class="form-group">
+                             <label asp-for="Input.Email"></label>
+                             <input asp-for="Input.Email" class="form-control" />
+                             <span asp-validation-for="Input.Email" class="text-danger"></span>
+                         </div>
+                         <button type="submit" class="btn btn-primary">Resend</button>
+            </form>
+         
+        </div>
+    </div>
+</div>
+
+@*
+<h1>@ViewData["Title"]</h1>
+<h4>Enter your email.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Resend</button>
+        </form>
+    </div>
+</div>*@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<div class="bottomspace"></div>

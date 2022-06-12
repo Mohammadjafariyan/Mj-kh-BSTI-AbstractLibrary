@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Http
+@using System.Web
+@using BigPardakht.Model
+@using Microsoft.AspNetCore.Http.Extensions
+@model (int total, int page)
+
+@inject IHttpContextAccessor _httpContextAccessor
+
+@{
+    
+
+    var uri = new Uri(_httpContextAccessor.HttpContext.Request.GetDisplayUrl());
+    string path = uri.GetLeftPart(UriPartial.Path);
+}
+
+
+
+@if (Model.total > 1)
+{
+
+    <p>کل رکورد ها @Model.total عدد است</p>
+
+    var totalPages = Model.total / MyGlobal.TakeConst + (Model.total % MyGlobal.TakeConst > 0 ? 1 : 0);
+
+    <span class="additinalButtons">
+    @for (int p = 1; p <= totalPages; p++)
+    {
+        var queryString = _httpContextAccessor.HttpContext.Request.QueryString;
+
+        var qs = HttpUtility.ParseQueryString(queryString.ToString());
+        
+        qs.Set("page", p.ToString());
+
+
+        if (p == Model.page)
+        {
+            <a class="btn btn-info" href="@path?@qs.ToString()">@p</a>
+      
+        }
+       else if (p == totalPages)
+        {
+            <a href="@path?@qs.ToString()">@p</a>
+      
+        }
+       else if (p==1)
+       {
+           <a href="@path?@qs.ToString()">@p</a>
+
+       }
+        else if (p == Model.page)
+        {
+            <a class="btn btn-info" href="@path?@qs.ToString()">@p</a>
+      
+        }
+        else
+        {
+
+            if (Model.page-2 <= p && p<=Model.page+2)
+            {
+                <a href="@path?@qs.ToString()">@p</a>
+            }
+       
+        }
+        
+    }
+</span>
+
+
+}

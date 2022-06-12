@@ -1,0 +1,200 @@
+﻿@using System.ComponentModel
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using System.Security.Policy
+@using AbstractLibrary.FormBuilder
+@using BigPardakht.Model
+@using Microsoft.AspNetCore.Http
+@model (dynamic entity,dynamic table,Func<dynamic, string> actionPart,Func<dynamic, string, dynamic, string> customRecordPart, Func<dynamic, string> editUrl,Func<dynamic, string> deleteUrl,Func<dynamic, string> createUrl)
+
+
+@{
+    var propertyInfos = Model.entity.GetType().GetProperties();
+    var controller = ViewContext.RouteData.Values["controller"];
+
+}
+
+@*
+<style>
+
+.content{
+max-height: 300px;
+overflow: auto;
+}
+</style>*@
+
+
+@if (Model.createUrl != null)
+{
+    <a class="additinalButtons" href="@Html.Raw(Model.createUrl(Model))">رکورد جدید</a>
+}
+else
+{
+    <a class="additinalButtons" href="/@controller/Save?id=0">رکورد جدید</a>
+}
+
+<br/>
+@await Component.InvokeAsync("Paging", new
+{
+    total = Model.table.Total, page = Model.table.Page
+})
+<hr/>
+<table class="table table-striped table-bordered table-responsive ">
+
+    <thead>
+    <tr>
+        @*<th>@MyGlobal.GetTranslate()["Name"]</th>*@
+        <th>
+
+
+
+            @MyGlobal.GetTranslate()["Name"]
+
+        </th>
+
+        @{
+            int c = 1;
+        }
+        @foreach (var entity in Model.table.EntityList)
+        {
+            <th >
+                @*@MyGlobal.GetTranslate()["Value"]*@
+
+                @if (Model.editUrl != null)
+                {
+                    <a class="additinalButtons edit" href="@Model.editUrl(entity)">ویرایش</a>
+                }
+                else
+                {
+                    <a class="edit additinalButtons" href="/@controller/Save?id=@entity.Id">ویرایش</a>
+                }
+                @if (Model.deleteUrl != null)
+                {
+                    @Html.ConfirmModal("تاکید و اطمینان از حذف", "حذف",
+                        "confirmModal", Html.DeleteForm((string) Model.deleteUrl(entity), "Post", (long) entity.Id))
+                }
+                else
+                {
+                    @Html.ConfirmModal("تاکید و اطمینان از حذف", "حذف",
+                        "confirmModal", Html.DeleteForm(Url.Action("Delete", @controller), "Post", (long) entity.Id))
+                }
+
+                @if (Model.actionPart != null)
+                {
+                    @Html.Raw(Model.actionPart(entity))
+                }
+            </th>
+
+            c++;
+        }
+    </tr>
+
+    </thead>
+    <tbody>
+
+    @{
+        int counter = Model.table.EntityList.Count;
+    }
+
+    @foreach (PropertyInfo prop in propertyInfos)
+    {
+        string translate = MyGlobal.GetTranslate()[prop.Name];
+
+        if (prop.IsHasAttribute<HiddenAttribute>() ||
+            prop.IsHasAttribute<RichTextAttribute>() ||
+            prop.IsHasAttribute<DontPrintAttribute>())
+        {
+        }
+        else
+        {
+            <tr>
+                @if (prop.IsHasAttribute<DisplayAttribute>())
+                {
+                    var foo = prop.GetCustomAttribute<DisplayAttribute>();
+
+                    <th>@foo.Name</th>
+                }
+                else
+                {
+                    <td>@translate</td>
+                }
+
+
+                @for (int i = 0; i < Model.table.EntityList.Count; i++)
+                {
+                    var entity = Model.table.EntityList[i];
+                    var val = prop.GetValue(entity);
+
+
+                    <td >
+                        <div class="content">
+
+
+                            @if (Model.customRecordPart != null)
+                            {
+                                var res = Model.customRecordPart(entity, prop.Name, val);
+                                if (res == "")
+                                {
+                                    @val
+                                }
+                                else
+                                {
+                                    @Html.Raw(Model.customRecordPart(entity, prop.Name, val))
+                                }
+                            }
+                            else
+                            {
+                                if (prop.PropertyType.IsEnum)
+                                {
+                                    var customAttribute = prop.GetCustomAttribute(typeof(DisplayNameAttribute));
+
+                                    var selectByServiceAttribute = customAttribute as DisplayNameAttribute;
+
+                                    if (selectByServiceAttribute == null)
+                                    {
+                                        if (val != null)
+                                        {
+                                            @MyGlobal.GetTranslate()[val.ToString()]
+                                        }
+                                        else
+                                        {
+                                            @val
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @selectByServiceAttribute.DisplayName
+                                    }
+                                }
+                                else if (prop.PropertyType == typeof(bool))
+                                {
+                                    if (val == true)
+                                    {
+                                        <span> @MyGlobal.GetTranslate()["True"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span> @MyGlobal.GetTranslate()["False"]</span>
+                                    }
+                                }
+                                else
+                                {
+                                    @val
+                                }
+                            }
+
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+    }
+
+    </tbody>
+</table>
+
+
+@await Component.InvokeAsync("Paging", new
+{
+    total = Model.table.Total, page = Model.table.Page
+})

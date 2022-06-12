@@ -1,0 +1,340 @@
+﻿@using System.ComponentModel
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using System.Security.Policy
+@using System.Text.RegularExpressions
+@using AbstractLibrary.FormBuilder
+@using AbstractLibrary.Model.MultiLanguageModel
+@using AbstractLibrary.ViewComponents
+@using BigPardakht.Model
+@using Microsoft.AspNetCore.Http
+@model AbstractLibrary.Model.TableVCModel
+
+@inject IServiceProvider ServiceProvider
+
+@{
+    var propertyInfos = Model.entity.GetType().GetProperties();
+    var controller = string.IsNullOrEmpty(Model.returnUrl) ? ViewContext.RouteData.Values["controller"] : Model.returnUrl;
+
+}
+
+
+
+@*
+<form style="padding: 50px" method="get">
+    
+    @{
+        object o = Model.entity;
+    }
+    @(await Component.InvokeAsync<FormBuilderViewComponent>(o))
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+
+    <div class="form-group">
+
+        <button class="btn btn-info">جستجو</button>
+    </div>
+
+
+</form>*@
+
+@*
+<style>
+
+.content{
+max-height: 300px;
+overflow: auto;
+}
+</style>*@
+
+@if (string.IsNullOrEmpty(Model.newRecordUrl))
+{
+    <a class="additinalButtons btn btn-primary" href="/@controller/Save?id=0">رکورد جدید</a>
+}
+else
+{
+    if (Model.newRecordUrl[0] != '/')
+    {
+        var pageUrl = ViewContext.RouteData.Values["page"]?.ToString();
+
+        string _url = "";
+
+        if (pageUrl?.Count(s => s == '/') > 1)
+        {
+            pageUrl = pageUrl.Replace("Index", Model.newRecordUrl);
+        }
+
+        <a class="additinalButtons btn btn-primary" href="@pageUrl">رکورد جدید</a>
+    }
+    else
+    {
+        <a class="additinalButtons btn btn-primary" href="@Model.newRecordUrl">رکورد جدید</a>
+    }
+}
+
+@if (Model.HasExportDocx)
+{
+    <br/>
+    <form method="post" style="margin-top: 20px">
+        @Html.AntiForgeryToken()
+
+        <br/>
+        <input asp-page-handler="ExtractDocx" class="btn btn-primary" type="submit" value="دریافت خروجی docx">
+    </form>
+}
+
+<br/>
+@await Component.InvokeAsync("Paging", new
+{
+    total = Model.table.Total, page = Model.table.Page
+})
+<hr/>
+<table class="table table-striped table-bordered ">
+
+<thead>
+<tr>
+    <th>عملیات</th>
+
+    @if (Model.FirstColumns != null)
+    {
+        foreach (var column in Model.FirstColumns)
+        {
+            var txt = column.Key;
+            <th >
+                @Html.Raw(txt)
+            </th>
+        }
+    }
+    @foreach (PropertyInfo prop in propertyInfos)
+    {
+        string translate = MyGlobal.GetTranslate()[prop.Name];
+
+        if (prop.IsHasAttribute<HiddenAttribute>() ||
+            prop.IsHasAttribute<RichTextAttribute>() ||
+            prop.IsHasAttribute<SelectFileAttribute>() ||
+            prop.IsHasAttribute<DontPrintAttribute>())
+        {
+        }
+        else
+        {
+            if (prop.IsHasAttribute<DisplayAttribute>())
+            {
+                var foo = prop.GetCustomAttribute<DisplayAttribute>();
+
+                <th>@foo.Name</th>
+            }
+            else
+            {
+                <th>@translate</th>
+            }
+        }
+    }
+
+
+</tr>
+
+</thead>
+<tbody>
+
+@if (Model.table.EntityList.Count == 0)
+{
+    <tr>
+
+        <td colspan="99">
+            <p style="text-align: center">هیچ رکوردی یافت نشد</p>
+        </td>
+    </tr>
+}
+
+@foreach (var entity in Model.table.EntityList)
+{
+    <tr>
+        <td>
+
+
+            @if (string.IsNullOrEmpty(Model.newRecordUrl))
+            {
+                if (@controller?.ToString().First() == '/')
+                {
+                    controller = controller.ToString().Substring(1, controller.ToString().Length - 1);
+                }
+                <a class="additinalButtons" href="/@controller/Save?id=@entity.Id">ویرایش</a>
+            }
+            else
+            {
+                if (Model.newRecordUrl[0] != '/')
+                {
+                    var pageUrl = ViewContext.RouteData.Values["page"]?.ToString();
+
+                    string _url = "";
+
+                    if (pageUrl?.Count(s => s == '/') > 1)
+                    {
+                        pageUrl = pageUrl.Replace("Index", Model.newRecordUrl);
+                    }
+
+                    <a class="additinalButtons btn btn-primary" href="@pageUrl?id=@entity.Id">ویرایش</a>
+                }
+                else
+                {
+                    <a class="additinalButtons btn btn-primary" href="@Model.newRecordUrl?id=@entity.Id">ویرایش</a>
+                }
+            }
+
+            @Html.ConfirmModal("تاکید و اطمینان از حذف", "حذف",
+                "confirmModal", Html.DeleteForm(Model.deleteUrl, "Post", (long) entity.Id))
+
+            @if (Model.actionPart != null)
+            {
+                @Html.Raw(Model.actionPart(entity))
+            }
+        </td>
+
+        @if (Model.FirstColumns != null)
+        {
+            foreach (var column in Model.FirstColumns)
+            {
+                var txt = column.Value(entity);
+                <td >
+
+                    <div class="content">
+                        @Html.Raw(txt)
+                    </div>
+                </td>
+            }
+        }
+
+        @foreach (PropertyInfo prop in propertyInfos)
+        {
+            var val = prop.GetValue(entity);
+
+            if (Model.Pipe != null && Model.Pipe.ContainsKey(prop.Name))
+            {
+                var txt = Model.Pipe[prop.Name](entity);
+                <td >
+
+                    <div class="content">
+                        @Html.Raw(txt)
+                    </div>
+                </td>
+                continue;
+            }
+
+            if (prop.IsHasAttribute<HiddenAttribute>() ||
+                prop.IsHasAttribute<RichTextAttribute>() ||
+                prop.IsHasAttribute<SelectFileAttribute>() ||
+                prop.IsHasAttribute<DontPrintAttribute>())
+            {
+            }
+            else
+            {
+                if (prop.IsHasAttribute<SelectByServiceAttribute>())
+                {
+                    var customAttribute = prop.GetCustomAttribute(typeof(SelectByServiceAttribute));
+
+                    var selectByServiceAttribute = customAttribute as SelectByServiceAttribute;
+
+                    if (selectByServiceAttribute == null)
+                    {
+                        throw new Exception("fileAttribute is null");
+                    }
+                    var service = ServiceProvider.GetService(selectByServiceAttribute.ServiceType) as ISelectListProvider;
+
+                    string selectName = service.GetSelectListSelectedValue(val);
+                    
+
+                    <td>
+                        
+                        <span>@selectName</span>
+                        @*@Html.DropDownList(prop.Name, service.GetSelectList(val), selectByServiceAttribute.SelectLabel,
+                                                new
+                                                {
+                                                    @class = "form-control",@readonly="readonly",
+                                                    @disabled="disabled"
+                                                })*@
+                    </td>
+
+                    continue;
+                }
+
+
+                if (prop.IsHasAttribute<ImagesAttribute>())
+                {
+                    if (val != null)
+                    {
+                        var imgs = (int[]) val;
+
+                        <td>
+                            @foreach (var img in  imgs)
+                            {
+                                <img src="/File/ById?fileId=@img" style="max-width: 200px;max-height: 200px">
+                            }
+                        </td>
+                    }
+
+                    continue;
+                }
+
+                if (prop.IsHasAttribute<TranslateAttribute>())
+                {
+                    var trans = (List<Translate>) val;
+
+                    string txt = trans.Where(t => t.Text != null).Select(s => s.Text).FirstOrDefault();
+
+                    {
+                        <td>
+                            @(txt)
+                        </td>
+                    }
+                    continue;
+                }
+
+                if ((val as IEntity) != null)
+                {
+                    var _entity = val as IEntity;
+                    <td >
+
+                        <div class="content">
+                            @_entity.Name
+                        </div>
+                    </td>
+                }
+                else if (val is decimal)
+                {
+                    var _val = (val as decimal?).Value.ToTrimmedString();
+                    <td >
+
+                        <div class="content">
+                            @_val
+                        </div>
+                    </td>
+                }
+                else
+                {
+                    <td >
+
+                        <div class="content">
+                            @val
+                        </div>
+                    </td>
+                }
+            }
+        }
+
+
+
+
+
+    </tr>
+}
+
+</tbody>
+</table>
+
+
+@await Component.InvokeAsync("Paging", new
+{
+    total = Model.table.Total, page = Model.table.Page
+})

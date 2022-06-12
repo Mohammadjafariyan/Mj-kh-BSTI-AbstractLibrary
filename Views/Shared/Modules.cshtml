@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@model object
+
+
+@inject IHttpContextAccessor _httpContextAccessor
+
+@{
+    
+
+    var uri = _httpContextAccessor.HttpContext.Request.GetDisplayUrl();
+   // string path = uri.GetLeftPart(UriPartial.Path);
+}
+
+<h3 class="text-center">ماژول ها یا زیر سیستم ها</h3>
+  <br/>
+
+<div class="row m-2 align-items-center">
+
+  <div class="card  col-md-3 @(uri.Contains("/admin/dashboard") ? "bg-primary":"") " >
+    <div class="card-header   ">داشبورد ادمین</div>
+    <div class="card-body">
+      
+      <a class="btn btn-primary" href="/admin/dashboard">پیکربندی</a>
+    </div>
+  </div>
+  
+  
+  <div class="card  col-md-3 @(uri.Contains("/BlogHome") ? "bg-primary":"") " >
+  <div class="card-header   ">ماژول وبلاگ</div>
+  <div class="card-body">
+    
+    <a class="btn btn-primary" href="/BlogHome">پیکربندی</a>
+  </div>
+</div>
+  <div class="card   col-md-3 @(uri.Contains("/EmailHome") ? "bg-primary":"")" >
+    <div class="card-header ">ماژول ایمیل</div>
+    <div class="card-body ">
+      <a class="btn btn-primary" href="/EmailHome">پیکربندی</a>
+    </div>
+  </div>
+  
+  
+  <div class="card    col-md-3 @(uri.Contains("/TicketHome") ? "bg-primary":"")" >
+  <div class="card-header  ">ماژول تیکتینگ</div>
+  <div class="card-body ">
+       <a class="btn btn-primary" href="/TicketHome">پیکربندی</a>
+ </div>
+</div>
+<div class="card    col-md-3 @(uri.Contains("/FileHome") ? "bg-primary":"")" >
+  <div class="card-header  ">ماژول مدیریت فایل ها</div>
+  <div class="card-body ">
+        <a class="btn btn-primary" href="/FileHome">پیکربندی</a>
+ </div>
+</div>@*
+<div class="card  bg-warning  col-md-3" >
+  <div class="card-header ">Header</div>
+  <div class="card-body ">
+    <h5 class="card-title">Warning card  title</h5>
+    <p class="card-text">Some quick example text to build on the card  title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card  bg-info  col-md-3" >
+  <div class="card-header ">Header</div>
+  <div class="card-body ">
+    <h5 class="card-title">Info card  title</h5>
+    <p class="card-text">Some quick example text to build on the card  title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card  bg-light  col-md-3" >
+  <div class="card-header ">Header</div>
+  <div class="card-body ">
+    <h5 class="card-title">Light card  title</h5>
+    <p class="card-text">Some quick example text to build on the card  title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card  bg-dark  col-md-3" >
+  <div class="card-header ">Header</div>
+  <div class="card-body ">
+    <h5 class="card-title">Dark card  title</h5>
+    <p class="card-text">Some quick example text to build on the card  title and make up the bulk of the card's content.</p>
+  </div>
+</div> *@   
+</div>

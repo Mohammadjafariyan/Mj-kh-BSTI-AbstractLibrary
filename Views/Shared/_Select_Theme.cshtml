@@ -1,0 +1,73 @@
+﻿@using AbstractLibrary.Service.Theme
+@using BigPardakht.Model
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@inject DashboardThemeProvider DashboardThemeProvider
+
+
+@inject IHttpContextAccessor _httpContextAccessor
+
+@{
+    /*var themes = DashboardThemeProvider.GetThemes()
+        .Select(c => new SelectListItem {Value = c.Name, Text = c.Translate})
+        .ToList();*/
+    var themes = DashboardThemeProvider.GetThemes()
+        .ToList();
+
+
+    var selectedTheme = _httpContextAccessor.HttpContext.Request.Cookies[MyConstants.SelectedTheme];
+}
+
+@{
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+
+<style>
+    .colorHolder{
+    width: 5px;
+    height: 5px ;
+    }
+</style>
+
+<div title="@Localizer["changeTheme"]" style="border-right: 1px solid #d0cccc">
+    <form id="changeTheme" asp-controller="BigPardakhtHome" style="display: flex"
+          asp-action="SetTheme" asp-route-returnUrl="@returnUrl"
+          method="post" class="form-horizontal" role="form">
+        @*<label asp-for="@requestCulture.RequestCulture.UICulture.Name">@Localizer["Language:"]</label>*@
+
+
+        <label style="margin-right: 10px">@MyGlobal.GetTranslate()["changeTheme"]</label>
+        <select name="themeName"
+                onchange="this.form.submit();"
+                asp-for="@selectedTheme"
+
+                class="form-control">
+
+            @foreach (var option in themes)
+            {
+                if (option.Name == selectedTheme)
+                {
+                    <option value="@option.Name" selected="selected" style="background-color: @option.Color;color: white">
+                        @option.Translate
+                        
+                    </option>
+                }
+                else
+                {
+                    <option value="@option.Name" style="background-color: @option.Color;color: white">
+                        @option.Translate
+                    </option>
+                }
+            }
+        </select>
+
+    </form>
+</div>

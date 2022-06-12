@@ -1,0 +1,59 @@
+﻿@using AbstractLibrary.Service.Theme
+@using BigPardakht.Model
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@inject DashboardThemeProvider DashboardThemeProvider
+
+
+@inject IHttpContextAccessor _httpContextAccessor
+
+@{
+    /*var themes = DashboardThemeProvider.GetThemes()
+        .Select(c => new SelectListItem {Value = c.Name, Text = c.Translate})
+        .ToList();*/
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+
+
+    var IsGuideDisabled = _httpContextAccessor.HttpContext.Request.Cookies[MyConstants.IsGuideDisabled];
+}
+
+@{
+}
+
+<style>
+    .colorHolder{
+    width: 5px;
+    height: 5px ;
+    }
+</style>
+
+<div title="@Localizer["changeTheme"]" >
+
+        @*<label asp-for="@requestCulture.RequestCulture.UICulture.Name">@Localizer["Language:"]</label>*@
+
+       @if (IsGuideDisabled == "true")
+       {
+           <a class="text-secondary guideEnabled" asp-controller="BigPardakhtHome" 
+                        asp-action="SetGuide" asp-route-returnUrl="@returnUrl" title="راهنما غیر فعال است">
+               <i class="fas fa-question-circle text-secondary" aria-hidden="true"></i>
+           </a>
+       }
+       else
+       {
+          <a asp-controller="BigPardakhtHome" 
+             asp-action="SetGuide" asp-route-returnUrl="@returnUrl"
+            class="text-primary guideEnabled" title="راهنما فعال است">
+         <i  class="fas fa-question-circle text-primary" aria-hidden="true"></i>
+        </a>
+
+       }
+
+</div>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="AppName" xml:space="preserve">
+        <value>بیت پرداخت</value>
+    </data>
+    <data name="NewPaymentGateway" xml:space="preserve">
+        <value>ثبت درگاه پرداخت</value>
+    </data>
+    <data name="Docs" xml:space="preserve">
+        <value>مستندات</value>
+    </data>
+
+    <data name="NameAndLastName" xml:space="preserve">
+        <value>نام و نام خانوادگی</value>
+    </data>
+
+
+    <data name="Phone" xml:space="preserve">
+        <value>موبایل</value>
+    </data>
+    <data name="Required" xml:space="preserve">
+        <value>این فیلد ضروری است</value>
+    </data>
+
+
+
+
+
+    <data name="BusinessPhone" xml:space="preserve">
+        <value>تلفن کسب وکار</value>
+    </data>
+    <data name="BusinessDomain" xml:space="preserve">
+        <value>نوع کسب و کار</value>
+    </data>
+    <data name="BusinessUniqId" xml:space="preserve">
+        <value>شناسه شرکت</value>
+    </data>
+    <data name="BusinessCeoName" xml:space="preserve">
+        <value>نام رپیس کسب و کار </value>
+    </data>
+    <data name="BusinessSubmitDate" xml:space="preserve">
+        <value>تاریخ شروع کسب و کار</value>
+    </data>
+    <data name="BusinessSabtCode" xml:space="preserve">
+        <value>کد شماره  </value>
+    </data>
+    <data name="BusinessMiliCode" xml:space="preserve">
+        <value>شناسه ملی</value>
+    </data>
+
+    <data name="BusinessPostalCode" xml:space="preserve">
+        <value>کد پستی</value>
+    </data>
+
+    <data name="BusinessAddress" xml:space="preserve">
+        <value>آدرس</value>
+    </data>
+    <data name="Title" xml:space="preserve">
+        <value>عنوان</value>
+    </data>
+    <data name="A value for the '{0}' property was not provided." xml:space="preserve">
+        <value>مقداری برای خصوصیت '{0}' فراهم نشده است.</value>
+    </data>
+</root>

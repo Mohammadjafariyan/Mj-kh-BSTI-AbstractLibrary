@@ -1,0 +1,93 @@
+﻿@using BigPardakht.Model
+@model (string propertyName,string label,string preValue) 
+
+
+@{
+    var generateRandomString = Guid.NewGuid().ToString();
+}
+
+<div class="form-group"       >
+    <br/>
+    <label>@Model.label</label>
+    <div class="editor_@generateRandomString"
+
+         style="height: 150px">
+        
+        @Html.Raw(Model.preValue)
+        
+    </div>
+</div>
+
+
+@{
+
+      
+
+        ViewData[MyConstants.PrintInLayoutEnd] = $@"
+<link href=""/_content/ContentModule/Quill/Quill.css"" rel=""stylesheet""/>
+    <link href=""/_content/ContentModule/Quill/Highlight.css"" rel=""stylesheet""/>
+
+
+    <♦ src=""/_content/ContentModule/Quill/Highlight.js"" type=""text/javascript""></♦>
+    <♦ src=""/_content/ContentModule/Quill/Quill.js"" type=""text/javascript""></♦>
+    <♦>
+                   var quill = new Quill('.editor_{generateRandomString}', {{
+                       bounds: '#editor',
+                       modules: {{
+                           'syntax': true,
+                           'toolbar': [
+                               ['bold', 'italic', 'underline', 'strike'],
+                               [{{ 'color': [] }}, {{ 'background': [] }}],
+                               [{{ 'script': 'super' }}, {{ 'script': 'sub' }}],
+                               [{{ 'header': '1' }}, {{ 'header': '2' }}, 'blockquote', 'code-block'],
+                               [{{ 'list': 'ordered' }}, {{ 'list': 'bullet' }}, {{ 'indent': '-1' }}, {{ 'indent': '+1' }}],
+                               [{{ 'direction': 'rtl' }}, {{ 'align': [] }}],
+                               ['link', 'image', 'video', 'formula'],
+                               ['clean']
+                           ],
+                       }},
+                       theme: 'snow'
+                   }});
+
+
+quill.on('text-change', function(delta, oldDelta, source) {{
+           updatequill();
+            }})
+           
+                   function updatequill() {{
+           
+                       debugger;
+                       $('input[name=""{Model.propertyName}""]').val(quill.root.innerHTML);
+                       
+                     
+                   }}
+               </♦>";
+    }
+
+<script>
+function docReady(fn) {
+    // see if DOM is already available
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        // call on next available tick
+        setTimeout(fn, 1);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+}  
+    let html=`@Html.Raw(ViewData[MyConstants.PrintInLayoutEnd])`;
+
+docReady(function() {
+    // DOM is loaded and ready for manipulation here
+    
+ /*  let element= createElementFromHTML(``)
+   
+   document.body.append(element);*/
+    
+    html=html.replaceAll('♦','script')
+    $('body').append(html);
+    
+});
+
+
+</script>
+

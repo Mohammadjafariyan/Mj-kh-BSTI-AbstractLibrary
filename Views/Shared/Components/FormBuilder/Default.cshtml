@@ -1,0 +1,507 @@
+﻿@using System.ComponentModel
+@using System.Reflection
+@using System.Text.RegularExpressions
+@using AbstractLibrary.FormBuilder
+@using AbstractLibrary.Model.File
+@using AbstractLibrary.Model.MultiLanguageModel
+@using AbstractLibrary.Model.MultiLanguageModel.MultiLanguageService
+@using AbstractLibrary.ViewComponents
+@using BigPardakht.Model
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.DependencyInjection
+@using SignalRMVCChat.Service.HelpDesk.Language
+@using Xceed.Document.NET
+@using ReadOnlyAttribute = AbstractLibrary.FormBuilder.ReadOnlyAttribute
+@model object
+@inject IServiceProvider ServiceProvider
+@inject LanguageService LanguageService;
+@*@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"*@
+
+
+<style>
+    label{
+    font-weight: bold;
+    }
+    
+    
+</style>
+
+
+@{
+    var propertyInfos = Model.GetType().GetProperties();
+
+    propertyInfos = propertyInfos.OrderBy(o => o.PropertyType == typeof(bool)).ToArray();
+}
+
+<div class="row">
+@foreach (var prop in propertyInfos)
+{
+    if (TempData.IsInHiddenList(prop.Name))
+    {
+        continue;
+    }
+    var attr = prop.CustomAttributes.FirstOrDefault();
+
+
+    var val = prop.GetValue(Model);
+
+
+    string translate = @MyGlobal.GetTranslate()[prop.Name];
+
+    if (prop.CustomAttributes.Any(s => s.AttributeType == typeof(DisplayNameAttribute)))
+    {
+        var displayNameAttribute = prop.GetCustomAttribute<DisplayNameAttribute>();
+
+        if (Regex.IsMatch(displayNameAttribute.DisplayName, "^[a-zA-Z0-9]*"))
+        {
+            translate =MyGlobal.GetTranslate()[displayNameAttribute.DisplayName];
+        }
+        else
+        {
+            translate = displayNameAttribute.DisplayName;
+        }
+    }
+
+
+    if (prop.Name == "Id")
+    {
+        @Html.Hidden("Id", val)
+        continue;
+    }
+
+    if (prop.IsHasAttribute<HiddenAttribute>())
+    {
+        @Html.Hidden(prop.Name, val)
+        continue;
+    }
+
+
+    if (prop.PropertyType == typeof(bool) ||
+        prop.PropertyType == typeof(bool?))
+    {
+        <div class="col-md-6  @prop.Name  form-group">
+
+            @Html.Label(translate)
+            @Html.Editor(prop.Name, prop.Name
+                , new
+                {
+                    @class = "form-control",
+                })
+
+            @Html.Help(prop)
+        </div>
+        continue;
+    }
+
+
+    if (attr == null)
+    {
+        <div class="col-md-6  @prop.Name">
+            @Html.Input(@Html.Label(translate).GetHtmlToString(), prop.Name, val)
+            @Html.Help(prop)
+        </div>
+        continue;
+    }
+
+    
+    if (prop.IsHasAttribute<DontPrintAttribute>())
+    {
+        continue;
+    }
+
+    if (prop.IsHasAttribute<RichTextAttribute>())
+    {
+        <div class="col-md-6  @prop.Name">
+            @Html.Hidden(prop.Name)
+            @(await Component.InvokeAsync<RichTextViewComponent>(
+                new
+                {
+                    propertyName = prop.Name,
+                    label = MyGlobal.GetTranslate()[prop.Name].Value,
+                    preValue = val
+                }))
+            @Html.Help(prop)
+        </div>
+
+        continue;
+    }
+
+
+    if (prop.IsHasAttribute<TranslateAttribute>())
+    {
+        var customAttribute = prop.GetCustomAttribute(typeof(TranslateAttribute));
+
+        var translateAttribute = customAttribute as TranslateAttribute;
+
+        if (translateAttribute == null)
+        {
+            throw new Exception("translateAttribute is null");
+        }
+
+        var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+
+        var definedLangueges = LanguageService.Get().ToList();
+
+        var translateInputViewModel = LanguageHelpService.TranslateInputsSetting(val, definedLangueges, requestCulture);
+
+
+        <div class="col-md-6  @prop.Name form-group">
+
+            @Html.Label(translate) به @(translateInputViewModel.DefaultLanguage.LanguageName)
+
+            <div class="input-group mb-3">
+                
+                <input type="text" class="form-control"
+                       id="@prop.Name" name="@(prop.Name)[0].Text" value="@translateInputViewModel.DefaultLanguage.Text">
+                
+                <input  type="hidden" name="@(prop.Name)[0].Code" value="@translateInputViewModel.DefaultLanguage.Code"/>
+                <input  type="hidden" name="@(prop.Name)[0].LanguageName" value="@translateInputViewModel.DefaultLanguage.LanguageName"/>
+
+                
+                <div class="input-group-prepend" dir="ltr">
+                    <span onclick="$('div#@prop.Name').modal('show')" class="input-group-text" id="basic-addon1">به زبان های دیگر</span>
+                </div>
+
+                @Html.Help(prop)
+
+            </div>
+
+            <div >
+                @Html.DynamicModal("پیکربندی ترجمه ها", null, prop.Name,
+                    Html.TranslationInputs(prop.Name, translate, translateInputViewModel).GetHtmlToString())
+            </div>
+
+            @*@Html.Label(translate)
+
+            @Html.DropDownList(prop.Name, LanguageService.GetSelectList(val), "",
+                new {@class = "form-control"})
+            @Html.Help(prop)*@
+        </div>
+
+        continue;
+    }
+
+
+    if (prop.IsHasAttribute<SelectByServiceAttribute>())
+    {
+        <div class="col-md-6  @prop.Name form-group">
+
+            @{
+                var customAttribute = prop.GetCustomAttribute(typeof(SelectByServiceAttribute));
+
+                var selectByServiceAttribute = customAttribute as SelectByServiceAttribute;
+
+                if (selectByServiceAttribute == null)
+                {
+                    throw new Exception("fileAttribute is null");
+                }
+                var service = ServiceProvider.GetService(selectByServiceAttribute.ServiceType) as ISelectListProvider;
+
+            }
+
+
+            @Html.Label(translate)
+
+            @Html.DropDownList(prop.Name, service.GetSelectList(val), selectByServiceAttribute.SelectLabel,
+                new {@class = "form-control"})
+            @Html.Help(prop)
+        </div>
+
+        continue;
+    }
+
+    if (prop.IsHasAttribute<ReadOnlyAttribute>())
+    {
+        <div class="col-md-6  @prop.Name">
+            @Html.Label(translate)
+
+            @Html.TextBox(prop.Name, (val ?? "") + "", new
+            {
+                @class = "form-control",
+                @readonly = "readonly"
+            })
+            @Html.Help(prop)
+        </div>
+        continue;
+    }
+    if (prop.IsHasAttribute<SelectEnumAttribute>())
+    {
+        var customAttribute = prop.GetCustomAttribute(typeof(SelectEnumAttribute));
+
+        var selectEnumAttribute = customAttribute as SelectEnumAttribute;
+
+        if (selectEnumAttribute == null)
+        {
+            throw new Exception("fileAttribute is null");
+        }
+
+
+        <div class="col-md-6  @prop.Name">
+            @Html.Label(translate)
+
+
+            @Html.DropDownList(prop.Name,
+                Html.GetEnumSelectList(selectEnumAttribute.EnumType)
+                , new
+                {
+                    @class = "form-control",
+                })
+            @Html.Help(prop)
+        </div>
+        continue;
+    }
+    if (prop.IsHasAttribute<TextAttribute>())
+    {
+        var textAttr = prop.GetCustomAttribute<TextAttribute>();
+
+        string onclick = "";
+        string onchange = "";
+        if (textAttr.Type == "number")
+        {
+            onclick = @$"onclick=""this.select();""";
+        }
+
+        if (textAttr.Type == "money")
+        {
+            onclick = @$"onclick=""this.select();""";
+            onchange = @$"onkeyup=""onNumberChange(this)""";
+        }
+        <div class="col-md-6  @prop.Name">
+            @Html.Label(translate)
+            <small class="_showerHelp"></small>
+
+            @*
+            <input @(Html.Raw(onclick)) @(Html.Raw(onchange)) type="@textAttr.Type" value="@((val ?? "") + "")"
+                            class="form-control" name="@prop.Name" id="@prop.Name"
+                            aria-describedby="helpId" placeholder="">
+                            *@
+
+
+
+            @Html.TextBox(prop.Name, (val ?? "") + "", new
+            {
+                id = prop.Name,
+                onclick,
+                onchange,
+                @class = "form-control",
+                type = textAttr.Type,
+            })
+
+
+            @Html.Help(prop)
+            <br/>
+
+        </div>
+        continue;
+    }
+
+
+    if (prop.IsHasAttribute<TextAreaAttribute>())
+    {
+        <div class="col-md-6  @prop.Name">
+            @Html.Label(translate)
+
+            @Html.TextArea(prop.Name, (val ?? "") + "", new
+            {
+                @class = "form-control"
+            })
+            @Html.Help(prop)
+        </div>
+        continue;
+    }
+
+
+    if (prop.IsHasAttribute<SelectColorAttribute>())
+    {
+        var customAttribute = prop.GetCustomAttribute(typeof(SelectColorAttribute));
+
+        var fileAttribute = customAttribute as SelectColorAttribute;
+
+        if (fileAttribute == null)
+        {
+            throw new Exception("fileAttribute is null");
+        }
+
+
+        <div class="col-md-6  @prop.Name form-group">
+            @Html.Label(translate)
+            <input type="color" class="form-control"
+                   id="@prop.Name" name="@prop.Name" value="#ff0000">
+
+            @Html.Help(prop)
+        </div>
+    }
+    if (prop.IsHasAttribute<FileAttribute>())
+    {
+        var customAttribute = prop.GetCustomAttribute(typeof(FileAttribute));
+
+        var fileAttribute = customAttribute as FileAttribute;
+
+        if (fileAttribute == null)
+        {
+            throw new Exception("fileAttribute is null");
+        }
+
+     
+        
+
+        <div class="col-md-6  @prop.Name">
+            <input
+                type="file" id="file"
+                name="@prop.Name"
+                accept="@fileAttribute.Accept"
+                
+               
+
+                @(fileAttribute.Multiple ? @"multiple=""multiple""" : "")
+                onchange="CheckSize(this)"/>
+
+            @Html.Help(prop)
+            <script>
+                function FileListItems (files) {
+                  var b = new ClipboardEvent("").clipboardData || new DataTransfer()
+                  for (var i = 0, len = files.length; i<len; i++) b.items.add(files[i])
+                  return b.files
+                }
+                
+                function showErr(param,msg){
+                    
+                    $(param).parent().find("alert").remove();
+                    
+                    $(param).parent().append(`
+                    
+                    <div class="alert alert-warning">${msg}</div>`)
+                    }
+
+                function CheckSize(param) {
+                         
+                    
+                    var alertSent=false;
+                    var newFileList = Array.from(event.target.files);
+
+                    
+                    let arr=[];
+                    for(let i = 0; i < newFileList.length; i++) {
+                      if(newFileList[i].size > 2097152){
+                          
+                      if (!alertSent){
+                          
+                                                   showErr(param,'اندازه فایل بسیار بزرگ است بنابراین فایل های بزرگ اضافه نشد');
+alertSent=true;
+                          }
+
+                      }else{
+                          
+                          if (i>5){
+                              
+                                                   showErr(param,'امکان انتخاب بیش از 5 فایل در یک زمان وجود ندارد');
+                            break;
+ }else{
+                              arr.push(newFileList[i]);
+                              }
+                          }
+                    }
+                    
+                    param.files=new FileListItems(arr);
+                    
+                  };
+                </script>
+        </div>
+        continue;
+    }
+
+
+    if (prop.IsHasAttribute<SelectFileAttribute>())
+    {
+        <div class="col-md-6  @prop.Name form-group">
+
+            @{
+                string name = prop.Name;
+
+                var _modelFileSupport= (IFileSupport)Model ;
+
+                var _preValue=_modelFileSupport.Files!=null && _modelFileSupport.Files.Length>0 ? string.Join(",", _modelFileSupport.Files) : "";
+            }
+
+            <br/>
+            <input placeholder="کد فایل های انتخاب شده در اینجا نمایش داده خواهد شد" class="form-control" readonly="readonly"
+                   name="@name" value="@_preValue">
+            @Html.Help(prop)
+            <br/>
+
+            @Html.DynamicModal("انتخاب فایل",
+                "انتخاب فایل",
+                "selectFileModal",
+                $@"
+                    <iframe style=""width: 100%;height: 80vh"" src=""/File/Index?noLayout=true""></iframe>"
+                )
+
+            <script>
+            function SelectFile(THIS,fileId){
+                
+                
+                debugger;
+                $(THIS).find('iframe').remove();
+                
+                $(THIS).toggleClass('btn-warning');
+                $(THIS).toggleClass('btn-info');
+                
+                $(THIS).text('انتخاب شد ')
+                
+                if (!window['selectedFiles']){
+                                    window['selectedFiles']=[];
+
+                    }
+                
+                    var exist=window['selectedFiles'].find(f=>f==fileId);
+                                   window['selectedFiles']=window['selectedFiles'].filter(f=>f!=fileId)
+
+
+ if (!exist)
+                        {
+                                        window['selectedFiles'].push(fileId);
+    
+                            }
+                    
+                
+                
+                let allSelected= window['selectedFiles']. join()
+                
+                
+                $('input[name="@prop.Name"]').val(allSelected);
+                
+                $('#selectFileModal').modal({show:false});
+                
+                }
+            </script>
+
+        </div>
+        continue;
+    }
+    if (prop.IsHasAttribute<SelectAttribute>())
+    {
+        <div class="col-md-6  @prop.Name form-group">
+
+            @Html.Label(translate)
+
+            @Html.DropDownList(prop.Name, ViewData[prop.Name] as SelectList, translate, new {@class = "form-control"})
+            @Html.Help(prop)
+        </div>
+        continue;
+    }
+}
+
+
+
+
+</div>
+<script>
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function onNumberChange(_this){
+    $(_this).parent().find('._showerHelp').text(numberWithCommas($(_this).val()) + 'ریال');
+}
+</script>

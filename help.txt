@@ -1,0 +1,4 @@
+dotnet ef migrations add filedbcontext --context BigPardakht.Data.ApplicationDbContext
+
+
+dotnet ef database update --context BigPardakht.Data.ApplicationDbContext
